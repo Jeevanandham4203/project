@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+</head>
+<body>
+    <input id="input" placeholder="Add a task">
+    <button id="addButton">Add</button>
+    <ul id="listcontainer">
+        <li>
+            Hello
+            <button onclick="deleteitem(event)">Delete</button>
+        </li>
+    </ul>
+
+    <script>
+        // Selecting ul and input tag
+        var ul = document.getElementById("listcontainer");
+        var input = document.getElementById("input");
+        var addButton = document.getElementById("addButton");
+
+        function adding() {
+            var taskText = input.value.trim(); // Trim whitespace
+            if (taskText === "") {
+                alert("Please enter a task.");
+                return;
+            }
+
+            var litem = document.createElement("li"); // Element creating
+            litem.innerHTML = taskText + " <button onclick='deleteitem(event)'>Delete</button>"; // Add text inside li element
+            ul.append(litem);
+            input.value = ""; // Clear the input after adding
+        }
+
+        function deleteitem(event) {
+            event.target.parentElement.remove();
+        }
+
+        // Adding event listener for the button
+        addButton.addEventListener("click", adding);
+
+        // Allow pressing Enter to add tasks
+        input.addEventListener("keypress", function(event) {
+            if (event.key === "Enter") {
+                adding();
+            }
+        });
+    </script>
+</body>
+</html>
